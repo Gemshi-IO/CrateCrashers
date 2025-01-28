@@ -253,3 +253,13 @@ footer a {
     top: 0; /* Align to the top */
     font-size: 1.5em; /* Adjust size as needed */
 }
+
+.footer-email {
+    color: white; /* Ensures the email link is white */
+   
+    margin-left: 10px; /* Adds space between links */
+}
+
+.footer-email:hover {
+    color: #ff6f61; /* Coral color on hover */
+}
