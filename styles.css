@@ -187,6 +187,13 @@ nav a:hover {
     transform: scale(1.05); /* Zoom effect on hover */
 }
 
+/* Add this media query for mobile devices */
+@media (max-width: 600px) {
+    .collage-images {
+        grid-template-columns: repeat(2, 1fr); /* At least 2 images in a row on mobile */
+    }
+}
+
 footer {
     background: black; /* Changed to solid black */
     color: white; /* Ensured text color is white */
@@ -227,4 +234,22 @@ footer a {
 .container.content h2 {
     margin-top: 40px;
     margin-bottom: 20px;
+}
+
+.icon-list {
+    list-style-type: none; /* Remove default bullets */
+    padding: 0; /* Remove padding */
+}
+
+.icon-list li {
+    position: relative; /* Position for the pseudo-element */
+    padding-left: 30px; /* Space for the icon */
+}
+
+.icon-list li::before {
+    content: ''; /* Empty content for the pseudo-element */
+    position: absolute; /* Position it absolutely */
+    left: 0; /* Align to the left */
+    top: 0; /* Align to the top */
+    font-size: 1.5em; /* Adjust size as needed */
 }
