@@ -214,3 +214,17 @@ footer .social-links a:hover {
 footer a {
     color: white; /* Change link color to white */
 }
+
+/* Add these additional styles for the how-to-play page */
+.container.content .video-preview {
+    margin: 20px 0 40px 0;
+}
+
+.container.content .video-container {
+    max-width: 600px; /* Slightly smaller than homepage video */
+}
+
+.container.content h2 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
