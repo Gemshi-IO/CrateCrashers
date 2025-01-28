@@ -5,84 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crate Crashers - Explosive Pinball Action</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        nav a {
-            color: black;
-        }
-        nav a:hover {
-            color: lightgray;
-        }
-        .feature-card {
-            background-color: #f0f0f0; /* Light background */
-            color: #333; /* Dark text */
-            padding: 10px; /* Add some padding for better spacing */
-            border-radius: 5px; /* Optional: rounded corners */
-            margin: 10px 0; /* Optional: spacing between feature cards */
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- FontAwesome for icons -->
 </head>
-<body>
-    <header>
-        
+<body style="color: black;">
+    <header style="background-color: white; color: black;">
         <img src="images/CratecrashersLogo.png" alt="Crate Crashers Logo" class="header-logo-large" style="width: 350px; height: auto;">
-       
     </header>
     
     <nav>
-        <style>
-            nav a {
-                color: black;
-            }
-            nav a:hover {
-                color: lightgray;
-            }
-        </style>
         <a href="index.html">Home</a>
         <a href="how-to-play.html">How to Play</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="eula.html">EULA</a>
     </nav>
 
     <div class="container">
         <div class="hero">
-            <img src="images/app-icon.png" alt="Crate Crashers Icon">
+            <img src="images/app-icon.png" alt="Crate Crashers Icon" style="max-width: 150px;">
             <h2>Welcome to Crate Crashers</h2>
             <p>Jump into the action with Crate Crashers! Charge up, fire the ball with precision, and smash through crates to dominate every level. Experience stunning visuals, fast-paced gameplay, and the added thrill of an auto-deploying parachute to keep your ball under control when the speed ramps up. Get ready to aim, crash, and conquer!</p>
-            <p><p>Coming Soon on App Store!</p></p>
+            <img src="images/app-store-coming-soon.png" alt="Coming Soon on App Store" style="max-width: 200px;">
+            <a href="#notify" class="cta-button" style="display: none;">Notify Me on Launch</a>
+        </div>
+
+        <!-- Added video section -->
+        <div class="video-preview">
+            <h2 class="video-title">Game Preview</h2>
+            <div class="video-container">
+                <video controls autoplay muted loop>
+                    <source src="video/CratecrashersPreview.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
 
         <div class="features">
-            <h2 class="features-title">Game Features</h2>
+            <h2 class="features-title" style="text-align: center; margin-bottom: 20px;">Game Features</h2>
             <div class="feature-card">
-                <h3>⚡ Fast-Paced Gameplay</h3>
+                <i class="fas fa-bolt fa-3x"></i>
+                <h3>Fast-Paced Gameplay</h3>
                 <p>Experience thrilling action with every launch!</p>
             </div>
             <div class="feature-card">
-                <h3>💣 Explosive Combos</h3>
+                <i class="fas fa-bomb fa-3x"></i>
+                <h3>Explosive Combos</h3>
                 <p>Chain your moves for maximum destruction!</p>
             </div>
             <div class="feature-card">
-                <h3>🌍 Stunning Environments</h3>
+                <i class="fas fa-globe fa-3x"></i>
+                <h3>Stunning Environments</h3>
                 <p>Explore beautifully designed levels!</p>
             </div>
             <div class="feature-card">
-                <h3>🎮 Engaging Mechanics</h3>
+                <i class="fas fa-gamepad fa-3x"></i>
+                <h3>Engaging Mechanics</h3>
                 <p>Master unique gameplay mechanics for an immersive experience!</p>
             </div>
             <div class="feature-card">
-                <h3>🌟 Unlockable Content</h3>
+                <i class="fas fa-star fa-3x"></i>
+                <h3>Unlockable Content</h3>
                 <p>Discover and unlock new characters and levels!</p>
             </div>
             <div class="feature-card">
-                <h3>🎶 Dynamic Soundtrack</h3>
+                <i class="fas fa-music fa-3x"></i>
+                <h3>Dynamic Soundtrack</h3>
                 <p>Enjoy an exciting soundtrack that enhances your gameplay!</p>
             </div>
             <div class="feature-card">
-                <h3>🌐 Online Leaderboards</h3>
+                <i class="fas fa-trophy fa-3x"></i>
+                <h3>Online Leaderboards</h3>
                 <p>Compete with friends and players worldwide!</p>
             </div>
             <div class="feature-card">
-                <h3>🛠️ Customization Options</h3>
+                <i class="fas fa-cogs fa-3x"></i>
+                <h3>Customization Options</h3>
                 <p>Personalize your gameplay experience with various options!</p>
             </div>
         </div>
@@ -104,13 +98,16 @@
                 <img src="images/screenshot12.jpg" alt="Screenshot 12">
                 <img src="images/screenshot13.jpg" alt="Screenshot 13">
                 <img src="images/screenshot14.jpg" alt="Screenshot 14">
-
             </div>
         </div>
     </div>
 
     <footer>
         <p>&copy; 2024 Crate Crashers. All rights reserved.</p>
+        <p>
+            <a href="privacy-policy.html">Privacy Policy</a> | 
+            <a href="eula.html">EULA</a>
+        </p>
     </footer>
 </body>
 </html>
