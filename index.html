@@ -3,113 +3,632 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crate Crashers - Explosive Action</title>
-    <meta name="description" content="Join the thrilling action of Crate Crashers! Charge up, fire the ball, and smash through crates in this explosive hyper casual game.">
-    <meta name="keywords" content="Crate Crashers, pinball game, explosive action, mobile game, arcade game, gaming, fun, multiplayer, hyper casual game">
-    <meta name="CrateCrashers" content="app-id=6739526922, app-argument=https://apps.apple.com/app/crate-crashers/id6739526922"> <!-- Smart App Banner -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- FontAwesome for icons -->
-    <link rel="icon" href="images/app-icon.ico" type="image/x-icon"> <!-- Favicon -->
+    <title>Crate Crashers | Skill-Based Physics & Pinball Brick Breaker</title>
+    <meta name="description" content="Crate Crashers is a premium, skill-based smash arcade game for iOS. Combine pinball physics, TNT chain reactions, and smart parachutes. Play offline.">
+    <meta name="keywords" content="Crate Crashers, physics brick breaker, offline arcade game, iOS game, explosive combos, casual physics game">
+    <meta name="apple-itunes-app" content="app-id=6739526922, app-argument=https://apps.apple.com/app/crate-crashers/id6739526922">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="images/app-icon.ico" type="image/x-icon">
+    <meta property="og:title" content="Crate Crashers | Explosive Physics Brick Breaker Game">
+    <meta property="og:description" content="The ultimate physics-based brick breaker game. Master the bounces and trigger explosive combos.">
+    <meta property="og:image" content="images/app-icon.png">
+    <meta property="og:url" content="https://www.cratecrashers.com">
+    <meta property="og:type" content="website">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #07090f;
+            --bg-soft: rgba(255, 255, 255, 0.03);
+            --border-soft: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #ff5722;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(255, 87, 34, 0.18), transparent 35%),
+                radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.15), transparent 28%),
+                var(--bg);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            width: min(1160px, 92%);
+            margin: 0 auto;
+        }
+
+        header, nav {
+            width: min(1160px, 92%);
+            margin: 0 auto;
+        }
+
+        header { padding: 24px 0 10px; }
+
+        .header-logo-large {
+            max-width: 250px;
+            width: 100%;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            gap: 16px;
+            padding-bottom: 24px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+        }
+
+        nav a.active,
+        nav a:hover {
+            color: var(--text-primary);
+            border-color: var(--border-soft);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero {
+            padding: 24px 0 56px;
+        }
+
+        .hero-shell {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .hero-copy h1 {
+            font-size: clamp(2.1rem, 5vw, 4rem);
+            line-height: 1.02;
+            margin: 0 0 14px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-copy p {
+            margin: 0 0 28px;
+            color: #cbd5e1;
+            max-width: 62ch;
+            font-size: 1.08rem;
+        }
+
+        .app-icon {
+            width: 76px;
+            height: 76px;
+            border-radius: 18px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-soft);
+        }
+
+        .ios-store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 18px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #f8fafc;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .ios-store-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.35);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+        }
+
+        .ios-store-btn:active {
+            transform: translateY(0);
+        }
+
+        .apple-logo {
+            width: 22px;
+            height: 22px;
+            fill: #f8fafc;
+            flex-shrink: 0;
+        }
+
+        .store-copy {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.05;
+        }
+
+        .store-copy .eyebrow {
+            font-size: 0.68rem;
+            letter-spacing: 0.02em;
+            color: #dbe4ef;
+            margin-bottom: 3px;
+        }
+
+        .store-copy .title {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .video-container {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: #000;
+            isolation: isolate;
+        }
+
+        .video-container::before {
+            content: "";
+            position: absolute;
+            inset: -30px;
+            border-radius: 30px;
+            box-shadow: 0 0 80px rgba(255, 87, 34, 0.3);
+            z-index: -1;
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+            min-height: 310px;
+            object-fit: cover;
+        }
+
+        .stats-counter {
+            margin: 0 auto 36px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            padding: 18px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(16px);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 12px 8px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-item i {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .counter {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-item h3 {
+            margin: 4px 0 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .features-title,
+        .gallery-title,
+        .faq-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin: 0 0 18px;
+            letter-spacing: -0.01em;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 52px;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 24px;
+            min-height: 180px;
+        }
+
+        .bento-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .bento-card p {
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        .bento-wide { grid-column: span 2; }
+
+        .gallery-wrap {
+            margin-bottom: 56px;
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid var(--border-soft);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 14px 0;
+        }
+
+        .gallery-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 48s linear infinite;
+            gap: 16px;
+        }
+
+        .gallery-set {
+            display: flex;
+            gap: 16px;
+        }
+
+        .gallery-set img {
+            width: 240px;
+            height: 520px;
+            object-fit: cover;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            flex: 0 0 auto;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .cta-section {
+            border-radius: 24px;
+            padding: 32px;
+            background: linear-gradient(125deg, rgba(255, 87, 34, 0.2), rgba(124, 58, 237, 0.16));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 48px;
+        }
+
+        .cta-section h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: clamp(1.45rem, 3vw, 2rem);
+        }
+
+        .cta-section p {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #dbe5f1;
+        }
+
+        .faq-section {
+            margin-bottom: 50px;
+            padding: 2px;
+        }
+
+        .faq-list details {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 16px 0;
+        }
+
+        .faq-list summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            position: relative;
+            padding-right: 28px;
+        }
+
+        .faq-list summary::-webkit-details-marker { display: none; }
+
+        .faq-list summary::after {
+            content: "+";
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .faq-list details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-list p {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+        }
+
+        footer {
+            width: min(1160px, 92%);
+            margin: 0 auto 34px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            color: var(--text-muted);
+        }
+
+        footer a:hover { color: var(--text-primary); }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .designer-line {
+            margin: 10px 0;
+        }
+
+        .gemshi-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gemshi-logo {
+            height: 20px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 940px) {
+            .hero-shell { grid-template-columns: 1fr; }
+            .stats-counter { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .bento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .bento-wide { grid-column: span 2; }
+        }
+
+        @media (max-width: 640px) {
+            .stats-counter,
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-wide { grid-column: span 1; }
+            .gallery-set img {
+                width: 180px;
+                height: 360px;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "VideoGame",
+            "name": "Crate Crashers",
+            "applicationCategory": "GameApplication",
+            "playMode": "SinglePlayer",
+            "genre": ["Arcade", "Physics", "Casual"],
+            "operatingSystem": "iOS",
+            "description": "Crate Crashers is a premium, fast-paced physics arcade game for iOS where players aim, bounce, and trigger explosive combos.",
+            "url": "https://www.cratecrashers.com",
+            "featureList": [
+                "Skill-based shot control with charge-and-release blasting",
+                "Explosive physics gameplay with TNT chain reactions",
+                "Smart auto-deploying safety parachutes for high-speed recovery",
+                "Dynamic offline arcade worlds with weather and parallax effects",
+                "Unique blend of pinball and classic brick breaker mechanics"
+            ]
+        }
+    </script>
 </head>
-<body style="color: black;">
-    <header style="background-color: white; color: black;">
-        <img src="images/CratecrashersLogo.png" alt="Crate Crashers Logo" class="header-logo-large" style="width: 350px; height: auto;">
+<body>
+    <header>
+        <img src="images/CratecrashersLogoWhite.png" alt="Crate Crashers premium arcade game studio logo" class="header-logo-large">
     </header>
-    
+
     <nav>
-        <a href="index.html">Home</a>
+        <a href="index.html" class="active">Home</a>
         <a href="how-to-play.html">How to Play</a>
+        <a href="#faq">FAQ</a>
     </nav>
 
-    <div class="container">
-        <div class="hero">
-            <img src="images/app-icon.png" alt="Crate Crashers Icon" style="max-width: 150px;">
-            <h2>Welcome to Crate Crashers</h2>
-            <p>Jump into the action with Crate Crashers! Charge up, fire the ball with precision, and smash through crates to dominate every level. Experience stunning visuals, fast-paced gameplay, and the added thrill of an auto-deploying parachute to keep your ball under control when the speed ramps up. Get ready to aim, crash, and conquer!</p>
-            <a href="https://apps.apple.com/app/crate-crashers/id6739526922" target="_blank">
-                <img src="images/downloadOnAppStore.png" alt="Download on App Store" style="max-width: 400px;">
-            </a>
-        </div>
-
-        <!-- Added video section -->
-        <div class="video-preview">
-            <h2 class="video-title">Game Preview</h2>
+    <section class="hero">
+        <div class="container hero-shell">
+            <div class="hero-copy">
+                <img src="images/app-icon.png" alt="Crate Crashers explosive physics game app icon" class="app-icon">
+                <h1>Aim. Launch. Destroy.</h1>
+                <p>The ultimate physics-based brick breaker game. Master the bounces and trigger explosive combos.</p>
+                <a href="https://apps.apple.com/app/crate-crashers/id6739526922" target="_blank" rel="noopener noreferrer" class="ios-store-btn" aria-label="Download Crate Crashers on the App Store">
+                    <svg class="apple-logo" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
+                        <path d="M318.7 268.7c-.2-48.3 39.5-71.5 41.3-72.6-22.6-33.1-57.8-37.7-70.3-38.2-29.9-3.1-58.4 17.7-73.6 17.7-15.2 0-38.7-17.3-63.5-16.8-32.7 .5-62.9 19-79.7 48.1-34.1 59.1-8.7 146.6 24.5 194.6 16.2 23.5 35.5 49.9 60.8 48.9 24.3-1 33.4-15.7 62.7-15.7 29.3 0 37.5 15.7 63.2 15.2 26.1-.5 42.6-23.7 58.6-47.3 18.7-27.3 26.3-53.8 26.7-55.2-.6-.3-51.2-19.6-51.6-77.7zM270.3 96.6c13.4-16.2 22.4-38.8 20-61.2-19.3 .8-42.7 12.9-56.6 29.1-12.4 14.4-23.2 37.4-20.3 59.4 21.5 1.7 43.5-10.9 56.9-27.3z"></path>
+                    </svg>
+                    <span class="store-copy">
+                        <span class="eyebrow">Download on the</span>
+                        <span class="title">App Store</span>
+                    </span>
+                </a>
+            </div>
             <div class="video-container">
-                <video controls autoplay muted loop>
+                <video controls autoplay muted loop playsinline>
                     <source src="video/CratecrashersPreview.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
         </div>
+    </section>
 
-        <div class="features">
-            <h2 class="features-title" style="text-align: center; margin-bottom: 20px;">Game Features</h2>
-            <div class="feature-card">
-                <i class="fas fa-bolt fa-3x"></i>
-                <h3>Fast-Paced Gameplay</h3>
-                <p>Experience thrilling action with every launch!</p>
+    <main class="container">
+        <section class="stats-counter" aria-label="Crate Crashers game stats">
+            <div class="stat-item">
+                <i class="fas fa-download fa-2x" aria-hidden="true"></i>
+                <div class="counter" data-target="5000">0</div>
+                <h3>Downloads</h3>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-bomb fa-3x"></i>
-                <h3>Explosive Combos</h3>
-                <p>Chain your moves for maximum destruction!</p>
+            <div class="stat-item">
+                <i class="fas fa-star fa-2x" aria-hidden="true"></i>
+                <div class="counter" data-target="4.8">0</div>
+                <h3>Rating</h3>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-globe fa-3x"></i>
-                <h3>Stunning Environments</h3>
-                <p>Explore beautifully designed levels!</p>
+            <div class="stat-item">
+                <i class="fas fa-globe fa-2x" aria-hidden="true"></i>
+                <div class="counter" data-target="90">0</div>
+                <h3>Countries</h3>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-gamepad fa-3x"></i>
-                <h3>Engaging Mechanics</h3>
-                <p>Master unique gameplay mechanics for an immersive experience!</p>
+            <div class="stat-item">
+                <i class="fas fa-wifi fa-2x" aria-hidden="true"></i>
+                <div class="counter" data-target="0">0</div>
+                <h3>Required Wi-Fi</h3>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-star fa-3x"></i>
-                <h3>Unlockable Content</h3>
-                <p>Discover and unlock new characters and levels!</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-music fa-3x"></i>
-                <h3>Dynamic Soundtrack</h3>
-                <p>Enjoy an exciting soundtrack that enhances your gameplay!</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-trophy fa-3x"></i>
-                <h3>Online Leaderboards</h3>
-                <p>Compete with friends and players worldwide!</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-cogs fa-3x"></i>
-                <h3>Customization Options</h3>
-                <p>Personalize your gameplay experience with various options!</p>
-            </div>
-        </div>
+        </section>
 
-        <div class="collage">
-            <h2 class="collage-title">Game Screenshots</h2>
-            <div class="collage-images">
-                <img src="images/screenshot1.jpg" alt="Screenshot 1">
-                <img src="images/screenshot2.jpg" alt="Screenshot 2">
-                <img src="images/screenshot3.jpg" alt="Screenshot 3">
-                <img src="images/screenshot4.jpg" alt="Screenshot 4">
-                <img src="images/screenshot5.jpg" alt="Screenshot 5">
-                <img src="images/screenshot6.jpg" alt="Screenshot 6">
-                <img src="images/screenshot7.jpg" alt="Screenshot 7">
-                <img src="images/screenshot8.jpg" alt="Screenshot 8">
-                <img src="images/screenshot9.jpg" alt="Screenshot 9">
-                <img src="images/screenshot10.jpg" alt="Screenshot 10">
+        <section class="features">
+            <h2 class="features-title">Features</h2>
+            <div class="bento-grid">
+                <article class="bento-card bento-wide">
+                    <h3>TNT &amp; Pinball Physics.</h3>
+                    <p>Smash crates, trigger TNT explosions, and create wild chain reactions with satisfying pinball-like momentum.</p>
+                </article>
+                <article class="bento-card">
+                    <h3>Smart Parachutes.</h3>
+                    <p>Take control of terminal velocity. Auto-deploying safety parachutes slow down high-speed balls for better control and recovery.</p>
+                </article>
+                <article class="bento-card">
+                    <h3>Skill-Based Shot Control.</h3>
+                    <p>Tap for quick low-power shots or hold to charge a powerful blast. The ball won't auto-follow—you must master the slice.</p>
+                </article>
+                <article class="bento-card bento-wide">
+                    <h3>Dynamic Offline Worlds.</h3>
+                    <p>Immerse yourself in jungles, deserts, and offices featuring weather and parallax effects. Smash crates anywhere, anytime without Wi-Fi.</p>
+                </article>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <section class="gallery">
+            <h2 class="gallery-title">Gameplay Gallery</h2>
+            <div class="gallery-wrap">
+                <div class="gallery-marquee">
+                    <div class="gallery-set">
+                        <img src="images/screenshot1.jpg" alt="Skill-based shot control and pinball physics gameplay">
+                        <img src="images/screenshot2.jpg" alt="Triggering TNT explosions and massive chain reactions">
+                        <img src="images/screenshot3.jpg" alt="Deploying smart safety parachutes for ball recovery">
+                        <img src="images/screenshot4.jpg" alt="Dynamic game worlds with parallax effects and weather">
+                        <img src="images/screenshot5.jpg" alt="Offline arcade gameplay smashing crates on iOS">
+                        <img src="images/screenshot6.jpg" alt="Skill-based shot control and pinball physics gameplay">
+                        <img src="images/screenshot7.jpg" alt="Triggering TNT explosions and massive chain reactions">
+                        <img src="images/screenshot8.jpg" alt="Deploying smart safety parachutes for ball recovery">
+                        <img src="images/screenshot9.jpg" alt="Dynamic game worlds with parallax effects and weather">
+                        <img src="images/screenshot10.jpg" alt="Offline arcade gameplay smashing crates on iOS">
+                        <img src="images/screenshot11.jpg" alt="Skill-based shot control and pinball physics gameplay">
+                        <img src="images/screenshot12.jpg" alt="Triggering TNT explosions and massive chain reactions">
+                        <img src="images/screenshot13.jpg" alt="Deploying smart safety parachutes for ball recovery">
+                        <img src="images/screenshot14.jpg" alt="Dynamic game worlds with parallax effects and weather">
+                    </div>
+                    <div class="gallery-set" aria-hidden="true">
+                        <img src="images/screenshot1.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 1">
+                        <img src="images/screenshot2.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 2">
+                        <img src="images/screenshot3.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 3">
+                        <img src="images/screenshot4.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 4">
+                        <img src="images/screenshot5.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 5">
+                        <img src="images/screenshot6.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 6">
+                        <img src="images/screenshot7.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 7">
+                        <img src="images/screenshot8.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 8">
+                        <img src="images/screenshot9.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 9">
+                        <img src="images/screenshot10.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 10">
+                        <img src="images/screenshot11.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 11">
+                        <img src="images/screenshot12.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 12">
+                        <img src="images/screenshot13.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 13">
+                        <img src="images/screenshot14.jpg" alt="Crate Crashers explosive physics gameplay screenshot duplicate 14">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Start Crashing?</h2>
+            <p>Download Crate Crashers now and jump into explosive, precision physics action.</p>
+            <a href="https://apps.apple.com/app/crate-crashers/id6739526922" target="_blank" rel="noopener noreferrer" class="ios-store-btn" aria-label="Get Crate Crashers on the App Store">
+                <svg class="apple-logo" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
+                    <path d="M318.7 268.7c-.2-48.3 39.5-71.5 41.3-72.6-22.6-33.1-57.8-37.7-70.3-38.2-29.9-3.1-58.4 17.7-73.6 17.7-15.2 0-38.7-17.3-63.5-16.8-32.7 .5-62.9 19-79.7 48.1-34.1 59.1-8.7 146.6 24.5 194.6 16.2 23.5 35.5 49.9 60.8 48.9 24.3-1 33.4-15.7 62.7-15.7 29.3 0 37.5 15.7 63.2 15.2 26.1-.5 42.6-23.7 58.6-47.3 18.7-27.3 26.3-53.8 26.7-55.2-.6-.3-51.2-19.6-51.6-77.7zM270.3 96.6c13.4-16.2 22.4-38.8 20-61.2-19.3 .8-42.7 12.9-56.6 29.1-12.4 14.4-23.2 37.4-20.3 59.4 21.5 1.7 43.5-10.9 56.9-27.3z"></path>
+                </svg>
+                <span class="store-copy">
+                    <span class="eyebrow">on the App Store</span>
+                    <span class="title">Get Crate Crashers</span>
+                </span>
+            </a>
+        </section>
+
+        <section class="faq-section" id="faq">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details>
+                    <summary>Do I need an internet connection to play?</summary>
+                    <p>No! Crate Crashers is a fully offline arcade game. You can smash crates and master your trick shots anywhere, without needing Wi-Fi or cellular data.</p>
+                </details>
+                <details>
+                    <summary>Is the game free to play?</summary>
+                    <p>Yes, you can download and play Crate Crashers for free. Jump right into the explosive, physics-based action.</p>
+                </details>
+                <details>
+                    <summary>How does the parachute mechanic work?</summary>
+                    <p>When your ball reaches extreme speeds, you can deploy a tactical parachute to slow it down, giving you precise control to navigate tricky obstacles and set up perfect combos.</p>
+                </details>
+                <details>
+                    <summary>How does the skill-based shot control work?</summary>
+                    <p>Unlike traditional auto-following brick breakers, Crate Crashers demands skill. The ball rests on your platform, and moving too fast will cause it to roll off. You can tap for quick, low-power shots, or hold to charge a powerful, explosive blast.</p>
+                </details>
+                <details>
+                    <summary>Is this just a standard brick breaker?</summary>
+                    <p>No. Crate Crashers combines classic brick-breaker mechanics with pinball physics and explosive TNT chain reactions. Every smash features dynamic sound and voice effects for a highly satisfying arcade experience.</p>
+                </details>
+            </div>
+        </section>
+    </main>
 
     <footer>
+        <p class="designer-line">
+            Discover other apps made by
+            <a href="https://gemshi.com/" target="_blank" rel="noopener noreferrer" class="gemshi-link">
+                <img src="images/GemshiLogoDark.png" alt="Gemshi privacy-first apps studio logo" class="gemshi-logo">
+                <span>Gemshi</span>
+            </a>
+        </p>
         <p>&copy; 2024 Crate Crashers. All rights reserved.</p>
         <p>
-            <a href="privacy-policy.html">Privacy Policy</a> | 
-            <a href="eula.html">EULA</a> | 
+            <a href="privacy-policy.html">Privacy Policy</a> |
+            <a href="eula.html">EULA</a> |
             <a href="mailto:gemshi@me.com">Contact</a>
         </p>
     </footer>
+
+    <script>
+        const counters = document.querySelectorAll(".counter");
+
+        counters.forEach((counter) => {
+            const target = Number(counter.getAttribute("data-target"));
+            const isDecimal = target % 1 !== 0;
+
+            const updateCounter = () => {
+                const count = Number(counter.innerText);
+                if (isDecimal) {
+                    if (count < target) {
+                        counter.innerText = (Math.round((count + 0.1) * 10) / 10).toFixed(1);
+                        setTimeout(updateCounter, 140);
+                    } else {
+                        counter.innerText = target.toFixed(1);
+                    }
+                } else {
+                    if (count < target) {
+                        const step = Math.max(1, Math.ceil(target / 20));
+                        counter.innerText = Math.min(target, count + step);
+                        setTimeout(updateCounter, 60);
+                    } else {
+                        counter.innerText = target;
+                    }
+                }
+            };
+
+            updateCounter();
+        });
+    </script>
 </body>
 </html>
